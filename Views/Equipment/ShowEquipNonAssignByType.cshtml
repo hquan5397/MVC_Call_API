@@ -1,0 +1,42 @@
+﻿@model Token_Based_Authentication_17_3.Models.TickRequestViewModel
+@{
+    ViewBag.Title = "ShowEquipNonAssignByType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Equips Available</h2>
+<div class="card-body">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="dataTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listequip)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Type</td>
+                        <td>@item.Name</td>
+                        <td>@item.Status</td>
+                        <td>@item.Description</td>
+                        <td>
+                            @Html.ActionLink("assign", "TickRequest","Equipment",
+                       new {IDRequest = Model.IDRequest,IDEquipment=item.ID,UserName=Model.UserName },
+                       new {@class="btn btn-success" })
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back to list", "ShowRequests", "Equipment", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

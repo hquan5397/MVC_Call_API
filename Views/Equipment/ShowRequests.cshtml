@@ -1,0 +1,45 @@
+﻿@model IList<Token_Based_Authentication_17_3.Models.RequestViewModel>
+@{
+    ViewBag.Title = "ShowRequests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Request List</h2>
+<div class="card-body">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="dataTable">
+            <thead>
+                <tr>
+                    <th>ID Request</th>                 
+                    <th>User Name</th>
+                    <th>Equipment Type</th>
+                    <th>Date created</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var request in Model)
+                {
+                    <tr>
+                        <td>@request.ID</td>                       
+                        <td>@request.UserName</td>
+                        <td>@request.EquipmentType</td>
+                        <td>@request.DateRequest</td>
+                        <td>@request.Status</td>
+                        <td>
+                            @if(@request.Status == "Pending"){
+                            @Html.ActionLink("Show Equips", "ShowEquipNonAssignByType","Equipment",
+                       new {Type=request.EquipmentType,UserName = request.UserName,IDRequest = request.ID},
+                       new { @class = "btn btn-primary" })
+                            }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back to list", "Index", "Equipment", null, new { @class="btn btn-primary"})
+    </div>
+</div>
+

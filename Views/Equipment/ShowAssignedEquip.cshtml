@@ -1,0 +1,45 @@
+﻿@model Token_Based_Authentication_17_3.Models.EquipEmployViewModel
+@{
+    ViewBag.Title = "ShowAssignedEquip";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Show Assigned Equip Of Employee: @Model.UserName</h2>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="dataTable">
+            <thead>
+                <tr>
+                    <th>ID Equip</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>User Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.Eqps)
+                {
+                <tr>
+                    <th>@item.ID</th>
+                    <th>@item.Type</th>
+                    <th>@item.Name</th>
+                    <th>@item.Status</th>
+                    <th>@item.Description</th>
+                    <th>@item.UserName</th>
+                    <th>@Ajax.ActionLink("Unassign","Unassign","Equipment",new {IDEquip = item.ID ,username = Model.UserName},
+                       new AjaxOptions
+                       {
+                           UpdateTargetId = "dataTable",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET"
+                       }, new { @class = "btn btn-dark" })</th>
+                </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back to List","EmployeeInfo",null,new { @class="btn btn-primary"})
+    </div>
+</div>

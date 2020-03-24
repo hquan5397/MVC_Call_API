@@ -1,0 +1,28 @@
+﻿@model List<Token_Based_Authentication_17_3.Models.EmployeeViewModel>
+@{
+    ViewBag.Title = "EmployeeInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="dataTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <th>@emp.Username</th>                   
+                        <th>@Html.ActionLink("Show Equip", "ShowAssignedEquip", "Equipment", new { UserName = emp.Username }, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</div> <!--end of card-->
